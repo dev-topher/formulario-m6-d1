@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Formulario de Tarjeta de Crédito</title>
+  <link rel="stylesheet" href="./assets/css/estilos.css">
+</head>
+<body>
+  <div id="app">
+    <form @submit.prevent="validateForm">
+      <div>
+        <label>Título de la tarjeta: </label>
+        <input v-model="cardTitle" :class="{ invalid: !validTitle }" @input="validateTitle"/>
+      </div>
+
+      <div>
+        <label>Chip SRC: </label>
+        <input v-model="chipSrc" />
+      </div>
+
+      <div>
+        <label>Número: </label>
+        <input v-model="cardNumber" :class="{ invalid: !validNumber }" @input="validateNumber" />
+      </div>
+
+      <div>
+        <label>Fecha de expiración: </label>
+        <input v-model="expiryDate" :class="{ invalid: !validExpiryDate }" @input="validateExpiryDate" />
+      </div>
+
+      <div>
+        <label>Propietario: </label>
+        <input v-model="owner" :class="{ invalid: !validOwner }" @input="validateOwner" />
+      </div>
+
+      <div>
+        <label>Tipo de tarjeta SRC: </label>
+        <input v-model="cardTypeSrc" />
+      </div>
+
+      <button type="submit">Validar</button>
+    </form>
+
+    <div class="carnet">
+      <h3>{{ cardTitle }}</h3>
+      <img v-if="chipSrc" width="40" :src="chipSrc" alt="Chip" />
+      <div>
+        <h2>{{ cardNumber }}</h2>
+        <span>Fecha Exp: <b>{{ expiryDate }}</b></span>
+      </div>
+      <footer>
+        <span>{{ owner }}</span>
+        <img v-if="cardTypeSrc" :src="cardTypeSrc" width="60" alt="Tipo de tarjeta" />
+      </footer>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <script src="./assets/js/app.js"></script>
+</body>
+</html>
